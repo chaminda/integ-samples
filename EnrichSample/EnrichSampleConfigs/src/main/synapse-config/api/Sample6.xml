@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<api context="/Sample6" name="Sample6" xmlns="http://ws.apache.org/ns/synapse">
+    <resource methods="GET">
+        <inSequence>
+            <log level="custom">
+                <property name="########## Sample6 ###########" value="Replacing text on an element of the message"/>
+            </log>
+            <payloadFactory media-type="xml">
+                <format>
+                    <getQuote xmlns="">
+                        <request>
+                            <symbol>IBM</symbol>
+                        </request>
+                    </getQuote>
+                </format>
+                <args/>
+            </payloadFactory>
+            <enrich>
+                <source clone="true" type="inline">WSO2</source>
+                <target xpath="//getQuote/request/symbol/text()"/>
+            </enrich>
+            <respond/>
+        </inSequence>
+        <outSequence/>
+        <faultSequence/>
+    </resource>
+</api>

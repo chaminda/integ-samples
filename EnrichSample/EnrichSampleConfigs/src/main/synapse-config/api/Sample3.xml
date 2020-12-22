@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<api context="/Sample3" name="Sample3" xmlns="http://ws.apache.org/ns/synapse">
+    <resource methods="GET">
+        <inSequence>
+            <log level="custom">
+                <property name="########## Sample3 ############" value="set a property enriching the message envelope, and set another property enriching an inline content, enrich inline content to property using xpath"/>
+            </log>
+            <payloadFactory media-type="xml">
+                <format>
+                    <Message xmlns="">
+                        <symbol>IBM</symbol>
+                        <price>1234.43</price>
+                    </Message>
+                </format>
+                <args/>
+            </payloadFactory>
+            <property name="messageType" scope="axis2" type="STRING" value="application/xml"/>
+            <enrich>
+                <source clone="false" type="envelope"/>
+                <target property="target_property" type="property"/>
+            </enrich>
+            <log level="full">
+                <property expression="get-property('target_property')" name="=========================1st_enriched_property"/>
+            </log>
+            <enrich>
+                <source clone="true" type="inline">
+                    <Cars xmlns=""/>
+                </source>
+                <target property="Cars" type="property"/>
+            </enrich>
+            <log level="full">
+                <property expression="get-property('Cars')" name="=========================2nd_CarListBeforeEnrich"/>
+            </log>
+            <enrich>
+                <source clone="true" type="inline">
+                    <Car xmlns="">Lamborghini</Car>
+                </source>
+                <target action="child" xpath="$ctx:Cars"/>
+            </enrich>
+            <log level="full">
+                <property expression="get-property('Cars')" name="=========================3rd_CarListAfterEnrich"/>
+            </log>
+            <respond/>
+        </inSequence>
+        <outSequence/>
+        <faultSequence/>
+    </resource>
+</api>

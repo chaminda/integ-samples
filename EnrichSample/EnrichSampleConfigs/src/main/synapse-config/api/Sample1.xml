@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<api context="/Sample1" name="Sample1" xmlns="http://ws.apache.org/ns/synapse">
+    <resource methods="GET">
+        <inSequence>
+            <payloadFactory media-type="xml">
+                <format>
+                    <Message xmlns="">
+                        <symbol>IBM</symbol>
+                        <price>1234.43</price>
+                    </Message>
+                </format>
+                <args/>
+            </payloadFactory>
+            <property name="messageType" scope="default" type="STRING" value="application/xml"/>
+            <enrich>
+                <source clone="false" type="envelope"/>
+                <target property="target_property" type="property"/>
+            </enrich>
+            <log level="full">
+                <property expression="get-property('target_property')" name="enriched_property"/>
+            </log>
+            <respond/>
+        </inSequence>
+        <outSequence/>
+        <faultSequence/>
+    </resource>
+</api>

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<api context="/Sample5" name="Sample5" xmlns="http://ws.apache.org/ns/synapse">
+    <resource methods="GET">
+        <inSequence>
+            <log level="custom">
+                <property name="##########Sample5############" value="Adding a child element to the payload"/>
+            </log>
+            <payloadFactory media-type="xml">
+                <format>
+                    <getQuote xmlns="">
+                        <request>
+                            <symbol>IBM</symbol>
+                        </request>
+                    </getQuote>
+                </format>
+                <args/>
+            </payloadFactory>
+            <log level="full">
+                <property name="Sample5" value="=========before_enrich======="/>
+            </log>
+            <enrich>
+                <source clone="true" type="inline">
+                    <symbol xmlns="">WSO2</symbol>
+                </source>
+                <target action="child" xpath="//getQuote/request"/>
+            </enrich>
+            <log level="full">
+                <property name="Sample5" value="=========after_enriched======="/>
+            </log>
+            <respond/>
+        </inSequence>
+        <outSequence/>
+        <faultSequence/>
+    </resource>
+</api>

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<api context="/Sample4" name="Sample4" xmlns="http://ws.apache.org/ns/synapse">
+    <resource methods="GET">
+        <inSequence>
+            <log level="custom">
+                <property name="########## Sample4 ############" value="set property enriching the message body and later use it to replace the original message"/>
+            </log>
+            <payloadFactory media-type="xml">
+                <format>
+                    <Message xmlns="">
+                        <symbol>IBM</symbol>
+                        <price>1234.43</price>
+                    </Message>
+                </format>
+                <args/>
+            </payloadFactory>
+            <enrich>
+                <source clone="true" type="body"/>
+                <target property="ORIGINAL_PAYLOAD" type="property"/>
+            </enrich>
+            <log level="full">
+                <property expression="get-property('ORIGINAL_PAYLOAD')" name="=========================ORIGINAL_PAYLOAD_after_enriched"/>
+            </log>
+            <payloadFactory media-type="xml">
+                <format>
+                    <Message xmlns="">
+                        <symbol>GOOGLE</symbol>
+                        <price>3244.43</price>
+                    </Message>
+                </format>
+                <args/>
+            </payloadFactory>
+            <log level="full"/>
+            <enrich>
+                <source clone="true" property="ORIGINAL_PAYLOAD" type="property"/>
+                <target type="body"/>
+            </enrich>
+            <log level="full">
+                <property name="=========================after_enriched_with_original_payload" value="test"/>
+            </log>
+        </inSequence>
+        <outSequence/>
+        <faultSequence/>
+    </resource>
+</api>

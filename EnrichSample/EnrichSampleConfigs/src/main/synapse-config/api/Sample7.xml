@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<api context="/Sample7" name="Sample7" xmlns="http://ws.apache.org/ns/synapse">
+    <resource methods="GET">
+        <inSequence>
+            <log level="custom">
+                <property name="########## Sample6 ###########" value="Adding a child element in to a json message"/>
+            </log>
+            <payloadFactory media-type="json">
+                <format>{ "Franklin" : { "student_Id" : "001" , "Marks" : [ 78, 89, 90, 80 ] } }</format>
+                <args/>
+            </payloadFactory>
+            <enrich>
+                <source clone="true" type="inline">100</source>
+                <target action="child" xpath="json-eval($.Franklin.Marks)"/>
+            </enrich>
+            <respond/>
+        </inSequence>
+        <outSequence/>
+        <faultSequence/>
+    </resource>
+</api>

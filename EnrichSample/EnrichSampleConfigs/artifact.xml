@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?><artifacts>
+    <artifact name="Sample1" groupId="wso2.sampleHelloWorld.api" version="1.0.0" type="synapse/api" serverRole="EnterpriseServiceBus">
+        <file>src/main/synapse-config/api/Sample1.xml</file>
+    </artifact>
+    <artifact name="Sample2" groupId="wso2.sampleHelloWorld.api" version="1.0.0" type="synapse/api" serverRole="EnterpriseServiceBus">
+        <file>src/main/synapse-config/api/Sample2.xml</file>
+    </artifact>
+    <artifact name="Sample3" groupId="wso2.sampleHelloWorld.api" version="1.0.0" type="synapse/api" serverRole="EnterpriseServiceBus">
+        <file>src/main/synapse-config/api/Sample3.xml</file>
+    </artifact>
+    <artifact name="Sample4" groupId="wso2.sampleHelloWorld.api" version="1.0.0" type="synapse/api" serverRole="EnterpriseServiceBus">
+        <file>src/main/synapse-config/api/Sample4.xml</file>
+    </artifact>
+    <artifact name="Sample5" groupId="wso2.sampleHelloWorld.api" version="1.0.0" type="synapse/api" serverRole="EnterpriseServiceBus">
+        <file>src/main/synapse-config/api/Sample5.xml</file>
+    </artifact>
+    <artifact name="Sample6" groupId="wso2.sampleHelloWorld.api" version="1.0.0" type="synapse/api" serverRole="EnterpriseServiceBus">
+        <file>src/main/synapse-config/api/Sample6.xml</file>
+    </artifact>
+    <artifact name="Sample7" groupId="wso2.sampleHelloWorld.api" version="1.0.0" type="synapse/api" serverRole="EnterpriseServiceBus">
+        <file>src/main/synapse-config/api/Sample7.xml</file>
+    </artifact>
+</artifacts>
